@@ -1,6 +1,6 @@
-# Neo Chimera
+# Chimera
 
-**Neo Chimera** (or simply **Chimera**) is an autonomous AI agent powered by local LLMs. It runs in a self-directed loop, writing and executing its own generated JavaScript code inside a secure sandbox. 
+**Chimera** is an autonomous AI agent powered by local LLMs. It runs in a self-directed loop, writing and executing its own generated JavaScript code inside a secure sandbox. 
 
 Instead of relying on hardcoded tools, Chimera explores its environment, manages its very own file system, and communicates with the internet by generating its own tools on the fly.
 
