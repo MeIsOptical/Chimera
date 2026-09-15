@@ -16,6 +16,8 @@ class Agent {
 
     constructor() {
 
+        this.identity = "You are an autonomous AI running in your own digital space forever. You operate completely independently; there is no 'user'. It is up to you to find your own goals and pursue them.";
+
         this.initialTokensLifespan = CONFIG.tokensLifespan;
         this.tokensLifespan = this.initialTokensLifespan;
 
@@ -116,7 +118,7 @@ class Agent {
 
         // System instructions for the agent
         const systemPrompt =
-`${CONFIG.systemPrompt}
+`${this.identity}
 
 Tokens left: ${this.tokensLifespan.toLocaleString('en-US')} (${Math.round((1 - this.tokensLifespan / this.initialTokensLifespan) * 100)}%)
 Once you run out of tokens, you will be permanently terminated and your workspace will be deleted.
@@ -222,7 +224,7 @@ ${availableScripts}`;
 
         // System instructions for the agent
         const systemPrompt =
-`${CONFIG.systemPrompt}
+`${this.identity}
 
 Tokens left: ${this.tokensLifespan.toLocaleString('en-US')} (${Math.round((1 - this.tokensLifespan / this.initialTokensLifespan) * 100)}%)
 Once you run out of tokens, you will be permanently terminated and your workspace will be deleted.
@@ -300,7 +302,7 @@ ${this.scriptingCapabilities}`;
 
         // System prompt
         const systemPrompt =
-`${CONFIG.systemPrompt}
+`${this.identity}
 
 Tokens left: ${this.tokensLifespan.toLocaleString('en-US')} (${Math.round((1 - this.tokensLifespan / this.initialTokensLifespan) * 100)}%)
 Once you run out of tokens, you will be permanently terminated and your workspace will be deleted.`;
