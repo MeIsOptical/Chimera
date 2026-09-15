@@ -16,6 +16,9 @@ class Agent {
 
     constructor() {
 
+        this.initialTokensLifespan = CONFIG.tokensLifespan;
+        this.tokensLifespan = this.initialTokensLifespan;
+
         this.scriptingCapabilities =
 `Scripting Capabilities:
 \t- The sandbox has built-in, globally available functions:
@@ -44,7 +47,7 @@ class Agent {
                 temperature: pTemperature,
                 num_ctx: CONFIG.inputTokens + CONFIG.outputTokens,
                 num_predict: CONFIG.outputTokens,
-                repeat_penalty: 1.11,
+                repeat_penalty: 1.12,
                 repeat_last_n: CONFIG.inputTokens + CONFIG.outputTokens,
                 keepAlive: CONFIG.keepAlive
             }
@@ -52,14 +55,26 @@ class Agent {
 
 
         // Display chunk by chunk
+        let tokensUsed = 0;
         console.log();
         let fullResponse = '';
         for await (const chunk of response) {
             const chunkText = chunk.message.content;
             fullResponse += chunkText;
             process.stdout.write(`${COLORS.gray}${chunkText}${COLORS.reset}`);
+
+            if (chunk.done) {
+                tokensUsed += chunk.prompt_eval_count || 0;
+                tokensUsed += chunk.eval_count || 0;
+            }
         }
         console.log("\n");
+
+        this.tokensLifespan -= tokensUsed;
+        this.tokensLifespan = Math.max(0, this.tokensLifespan);
+        console.log(COLORS.orange + `Used ${tokensUsed.toLocaleString('en-US')} tokens. Remaining: ${this.tokensLifespan.toLocaleString('en-US')} tokens (${Math.round((1 - this.tokensLifespan / this.initialTokensLifespan) * 100)}%)` + COLORS.reset);
+
+        console.log();
 
 
         // Check if it is a valid JSON
@@ -102,6 +117,9 @@ class Agent {
         // System instructions for the agent
         const systemPrompt =
 `${CONFIG.systemPrompt}
+
+Tokens left: ${this.tokensLifespan.toLocaleString('en-US')} (${Math.round((1 - this.tokensLifespan / this.initialTokensLifespan) * 100)}%)
+Once you run out of tokens, you will be permanently terminated and your workspace will be deleted.
 
 ${this.scriptingCapabilities}
 
@@ -206,6 +224,9 @@ ${availableScripts}`;
         const systemPrompt =
 `${CONFIG.systemPrompt}
 
+Tokens left: ${this.tokensLifespan.toLocaleString('en-US')} (${Math.round((1 - this.tokensLifespan / this.initialTokensLifespan) * 100)}%)
+Once you run out of tokens, you will be permanently terminated and your workspace will be deleted.
+
 ${this.scriptingCapabilities}`;
 
 
@@ -278,7 +299,13 @@ ${this.scriptingCapabilities}`;
 
 
         // System prompt
-        const systemPrompt = CONFIG.systemPrompt;
+        const systemPrompt =
+`${CONFIG.systemPrompt}
+
+Tokens left: ${this.tokensLifespan.toLocaleString('en-US')} (${Math.round((1 - this.tokensLifespan / this.initialTokensLifespan) * 100)}%)
+Once you run out of tokens, you will be permanently terminated and your workspace will be deleted.`;
+
+
 
         const userPrompt =
 `[SYSTEM] Select an existing script to execute and provide the necessary inputs to accomplish your latest objective.

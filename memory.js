@@ -113,6 +113,11 @@ class Memory {
 
             this.chatHistory.shift();
         }
+
+        const hasUserMessage = this.chatHistory.some(msg => msg.role === 'user');
+        if (!hasUserMessage) {
+            this.chatHistory.unshift({ role: 'user', content: '[SYSTEM] Actions history was truncated due to limited context window.' });
+        }
     }
 
 }

@@ -1,4 +1,5 @@
 
+process.stdin.resume();
 console.clear();
 
 const memory = require('./memory');
@@ -6,7 +7,7 @@ const agent = require('./agent');
 
 async function main() {
 
-    while (true) {
+    while (agent.tokensLifespan > 0) {
         try {
             agent.nextMove = (await agent.generateNextMove()).tool_to_call;
             const toolResult = await agent.useTool(agent.nextMove);
@@ -18,6 +19,9 @@ async function main() {
         }
         await new Promise(resolve => setTimeout(resolve, 5000));
     }
+
+    console.log();
+    console.log("Execution ended: Ran out of tokens.");
 
 }
 
