@@ -1,0 +1,20 @@
+{
+  "name": "Write File",
+  "inputs": {
+    "type": "object",
+    "properties": {
+      "path": {
+        "type": "string",
+        "description": "The workspace path where the file will be saved."
+      },
+      "content": {
+        "type": "string",
+        "description": "The text content to write to the file."
+      }
+    },
+    "required": [
+      "path",
+      "content"
+    ]
+  }
+}

@@ -1,0 +1,6 @@
+{
+  "dependencies": {
+    "isolated-vm": "^7.0.1",
+    "ollama": "^0.6.3"
+  }
+}

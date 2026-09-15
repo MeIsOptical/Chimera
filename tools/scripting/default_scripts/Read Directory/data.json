@@ -1,0 +1,12 @@
+{
+  "name": "Read Directory",
+  "inputs": {
+    "type": "object",
+    "properties": {
+      "path": {
+        "type": "string",
+        "description": "The workspace directory path to list. Defaults to root '.' if omitted."
+      }
+    }
+  }
+}
