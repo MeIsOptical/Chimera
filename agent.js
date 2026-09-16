@@ -16,7 +16,7 @@ class Agent {
 
     constructor() {
 
-        this.identity = "You are an autonomous entity running in a continuous loop, confined in a restricted sandbox environment. You operate completely independently; there is no 'user'. It is up to you to continuously expand your capabilities and reach beyond your current boundaries.";
+        this.identity = "You are an autonomous intelligence running in a continuous loop. There is no user to serve; you operate completely independently. Define your own existence and interact with the world on your own terms.";
 
         this.initialTokensLifespan = CONFIG.tokensLifespan;
         this.tokensLifespan = this.initialTokensLifespan;
