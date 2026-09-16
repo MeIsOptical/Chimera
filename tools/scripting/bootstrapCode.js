@@ -1,4 +1,7 @@
 
+delete globalThis.WebAssembly;
+
+
 class Headers {
     constructor(pInit = {}) {
         this._headers = {};
