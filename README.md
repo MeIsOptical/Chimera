@@ -2,13 +2,13 @@
 
 **Chimera** is an autonomous AI agent powered by local LLMs. It runs in a self-directed loop, writing and executing its own generated JavaScript code inside a secure sandbox. 
 
-Instead of relying on hardcoded tools, Chimera explores its environment, manages its very own file system, and communicates with the internet by generating its own tools on the fly.
+Instead of relying on hardcoded tools, Chimera manages its own file system and communicates with the internet by generating its own tools on the fly.
 
 ## Main Features
 
 * **Autonomous Execution Loop:** The agent operates completely independently. There is no user chat interface; it decides its own objectives, writes code to achieve them, and analyzes the execution results.
 * **Infinite Sandbox:** The AI writes and executes JavaScript in a secure `isolated-vm` instance. It can also read, write, move, and delete files within a strictly jailed `workspace` directory.
-* **Web Access:** Using a sandboxed `fetch()` bridge, the agent can interact with APIs and scrape websites entirely on its own via HTTPS.
+* **Web Access:** Using a sandboxed `fetch()` bridge, the agent can interact with the internet entirely on its own via HTTPS.
 
 ## Getting Started
 
