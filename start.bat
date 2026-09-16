@@ -8,4 +8,4 @@ cscript //nologo "%VBS_FILE%" >nul 2>&1
 del "%VBS_FILE%"
 
 :: Start the script
-node index.js
+node index
