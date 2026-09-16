@@ -13,15 +13,16 @@ Instead of relying on hardcoded tools, Chimera explores its environment, manages
 ## Getting Started
 
 ### Requirements
-* **Node.js** (v18+)
+* **Node.js** (v18+).
 * **Ollama** running locally.
 * A capable local LLM (Recommended: `qwen3.8:27b` or similar high-context models).
 
 ### Installation
-1. Clone the repository
-2. Install dependencies with `npm install`
-3. Update the `config.js` file to match your device's capabilities and preferences.
-4. Run `start.bat`
+1. Clone the repository.
+2. Install dependencies with `npm install`.
+3. Rename `config.example.js` to `config.js`.
+4. Update `config.js` to match your preferences.
+5. Run `start.bat`.
 
 ## ⚠️ Security Notice ⚠️
 

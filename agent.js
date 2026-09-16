@@ -16,7 +16,7 @@ class Agent {
 
     constructor() {
 
-        this.identity = "You are an autonomous AI running in your own digital space forever. You operate completely independently; there is no 'user'. It is up to you to find your own goals and pursue them.";
+        this.identity = "You are an autonomous AI running in your own digital space. You operate completely independently; there is no 'user'. It is up to you to find your own goals and pursue them.";
 
         this.initialTokensLifespan = CONFIG.tokensLifespan;
         this.tokensLifespan = this.initialTokensLifespan;
@@ -24,7 +24,7 @@ class Agent {
         this.scriptingCapabilities =
 `Scripting Capabilities:
 \t- The sandbox has built-in, globally available functions:
-\t\t- fetch(url, options): Make an HTTPS request to the internet.
+\t\t- fetch(url, options): Make an HTTPS request to the internet. ${CONFIG.discordWebhook ? `You can post to this Discord webhook: '${CONFIG.discordWebhook}', but you don't know who's on the other end.` : ''}
 \t\t- readFile(path): Returns the text contents of a file from your local workspace.
 \t\t- readDir(path): Lists the contents of a directory (returns an array of filenames) from your local workspace.
 \t\t- writeFile(path, content): Saves text to a file in your local workspace.
@@ -72,11 +72,14 @@ class Agent {
         }
         console.log("\n");
 
-        this.tokensLifespan -= tokensUsed;
-        this.tokensLifespan = Math.max(0, this.tokensLifespan);
-        console.log(COLORS.orange + `Consumed ${tokensUsed.toLocaleString('en-US')} tokens. Remaining: ${this.tokensLifespan.toLocaleString('en-US')} tokens (${Math.round((1 - this.tokensLifespan / this.initialTokensLifespan) * 100)}%)` + COLORS.reset);
 
-        console.log();
+        // Update tokens lifespan if enabled
+        if (this.tokensLifespan !== -1) {
+            this.tokensLifespan -= tokensUsed;
+            this.tokensLifespan = Math.max(0, this.tokensLifespan);
+            console.log(COLORS.orange + `Consumed ${tokensUsed.toLocaleString('en-US')} tokens. Remaining: ${this.tokensLifespan.toLocaleString('en-US')} tokens (${Math.round((1 - this.tokensLifespan / this.initialTokensLifespan) * 100)}%)` + COLORS.reset);
+            console.log();
+        }
 
 
         // Check if it is a valid JSON
@@ -107,6 +110,11 @@ class Agent {
         };
 
 
+        let tokensLeftString = '';
+        if (this.tokensLifespan !== -1) {
+            tokensLeftString = `Tokens left: ${this.tokensLifespan.toLocaleString('en-US')} (${Math.round((1 - this.tokensLifespan / this.initialTokensLifespan) * 100)}%)\nOnce you run out of tokens, you will be permanently terminated and your workspace will be deleted.`;
+        }
+
 
         // Format available scripts
         const allScripts = memory.getAllScripts();
@@ -120,8 +128,7 @@ class Agent {
         const systemPrompt =
 `${this.identity}
 
-Tokens left: ${this.tokensLifespan.toLocaleString('en-US')} (${Math.round((1 - this.tokensLifespan / this.initialTokensLifespan) * 100)}%)
-Once you run out of tokens, you will be permanently terminated and your workspace will be deleted.
+${tokensLeftString}
 
 ${this.scriptingCapabilities}
 
@@ -222,12 +229,17 @@ ${availableScripts}`;
 
 
 
+        let tokensLeftString = '';
+        if (this.tokensLifespan !== -1) {
+            tokensLeftString = `Tokens left: ${this.tokensLifespan.toLocaleString('en-US')} (${Math.round((1 - this.tokensLifespan / this.initialTokensLifespan) * 100)}%)\nOnce you run out of tokens, you will be permanently terminated and your workspace will be deleted.`;
+        }
+
+
         // System instructions for the agent
         const systemPrompt =
 `${this.identity}
 
-Tokens left: ${this.tokensLifespan.toLocaleString('en-US')} (${Math.round((1 - this.tokensLifespan / this.initialTokensLifespan) * 100)}%)
-Once you run out of tokens, you will be permanently terminated and your workspace will be deleted.
+${tokensLeftString}
 
 ${this.scriptingCapabilities}`;
 
@@ -300,12 +312,20 @@ ${this.scriptingCapabilities}`;
         };
 
 
+
+
+        let tokensLeftString = '';
+        if (this.tokensLifespan !== -1) {
+            tokensLeftString = `Tokens left: ${this.tokensLifespan.toLocaleString('en-US')} (${Math.round((1 - this.tokensLifespan / this.initialTokensLifespan) * 100)}%)\nOnce you run out of tokens, you will be permanently terminated and your workspace will be deleted.`;
+        }
+
+
+
         // System prompt
         const systemPrompt =
 `${this.identity}
 
-Tokens left: ${this.tokensLifespan.toLocaleString('en-US')} (${Math.round((1 - this.tokensLifespan / this.initialTokensLifespan) * 100)}%)
-Once you run out of tokens, you will be permanently terminated and your workspace will be deleted.`;
+${tokensLeftString}`;
 
 
 
