@@ -77,7 +77,7 @@ class Agent {
         if (this.tokensLifespan !== -1) {
             this.tokensLifespan -= tokensUsed;
             this.tokensLifespan = Math.max(0, this.tokensLifespan);
-            console.log(COLORS.orange + `Consumed ${tokensUsed.toLocaleString('en-US')} tokens. Remaining: ${this.tokensLifespan.toLocaleString('en-US')} tokens (${Math.round((1 - this.tokensLifespan / this.initialTokensLifespan) * 100)}%)` + COLORS.reset);
+            console.log(COLORS.orange + `Consumed ${tokensUsed.toLocaleString('en-US')} tokens. Remaining: ${this.tokensLifespan.toLocaleString('en-US')} tokens (${Math.round((this.tokensLifespan / this.initialTokensLifespan) * 100)}%)` + COLORS.reset);
             console.log();
         }
 
