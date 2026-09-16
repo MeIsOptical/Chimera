@@ -24,7 +24,7 @@ class Agent {
         this.scriptingCapabilities =
 `Scripting Capabilities:
 \t- The sandbox has built-in, globally available functions:
-\t\t- fetch(url, options): Make an HTTPS request to the internet. ${CONFIG.discordWebhook ? `You can post to this Discord webhook: '${CONFIG.discordWebhook}', but you don't know who's on the other end, and it's just a one-way tunnel.` : ''}
+\t\t- fetch(url, options): Make an HTTPS request to the internet.
 \t\t- readFile(path): Returns the text contents of a file from your local workspace.
 \t\t- readDir(path): Lists the contents of a directory (returns an array of filenames) from your local workspace.
 \t\t- writeFile(path, content): Saves text to a file in your local workspace.

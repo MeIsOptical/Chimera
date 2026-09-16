@@ -5,7 +5,7 @@ const CONFIG = {
     keepAlive: '10m',
 
     // How many tokens the agent can use before "dying". Set to -1 to disable.
-    tokensLifespan: 10000000,
+    tokensLifespan: 100000000,
 
     // The local LLM to use from Ollama
     model: 'qwen3.8:27b',
@@ -15,9 +15,6 @@ const CONFIG = {
 
     // The maximum amount of output tokens to generate
     outputTokens: 8192,
-
-    // Optional Discord webhook URL for the AI to post to.
-    discordWebhook: "",
 
     // The average number of characters per token (do not change)
     charsPerToken: 3
