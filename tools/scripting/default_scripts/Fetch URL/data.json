@@ -6,6 +6,17 @@
       "url": {
         "type": "string",
         "description": "The URL to fetch."
+      },
+      "method": {
+        "type": "string",
+        "description": "The HTTP method to use (e.g., GET, POST, PUT, DELETE). Defaults to GET."
+      },
+      "body": {
+        "type": [
+          "string",
+          "object"
+        ],
+        "description": "Optional payload for POST/PUT requests. Can be a string or a JSON object."
       }
     },
     "required": [
