@@ -20,9 +20,8 @@ Instead of relying on hardcoded tools, Chimera explores its environment, manages
 ### Installation
 1. Clone the repository.
 2. Install dependencies with `npm install`.
-3. Rename `config.example.js` to `config.js`.
-4. Update `config.js` to match your preferences.
-5. Run `start.bat`.
+3. Update `config.js` to match your preferences.
+4. Run `start.bat` or `node index`.
 
 ## ⚠️ Security Notice ⚠️
 
