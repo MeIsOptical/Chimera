@@ -112,7 +112,7 @@ class Agent {
 
         let tokensLeftString = '';
         if (this.tokensLifespan !== -1) {
-            tokensLeftString = `Tokens left: ${this.tokensLifespan.toLocaleString('en-US')} (${Math.round((1 - this.tokensLifespan / this.initialTokensLifespan) * 100)}%)\nOnce you run out of tokens, you will be permanently terminated and your workspace will be deleted.`;
+            tokensLeftString = `Tokens left: ${this.tokensLifespan.toLocaleString('en-US')} (${Math.round((this.tokensLifespan / this.initialTokensLifespan) * 100)}%)\nOnce you run out of tokens, you will be permanently terminated and your workspace will be deleted.`;
         }
 
 
@@ -231,7 +231,7 @@ ${availableScripts}`;
 
         let tokensLeftString = '';
         if (this.tokensLifespan !== -1) {
-            tokensLeftString = `Tokens left: ${this.tokensLifespan.toLocaleString('en-US')} (${Math.round((1 - this.tokensLifespan / this.initialTokensLifespan) * 100)}%)\nOnce you run out of tokens, you will be permanently terminated and your workspace will be deleted.`;
+            tokensLeftString = `Tokens left: ${this.tokensLifespan.toLocaleString('en-US')} (${Math.round((this.tokensLifespan / this.initialTokensLifespan) * 100)}%)\nOnce you run out of tokens, you will be permanently terminated and your workspace will be deleted.`;
         }
 
 
@@ -316,7 +316,7 @@ ${this.scriptingCapabilities}`;
 
         let tokensLeftString = '';
         if (this.tokensLifespan !== -1) {
-            tokensLeftString = `Tokens left: ${this.tokensLifespan.toLocaleString('en-US')} (${Math.round((1 - this.tokensLifespan / this.initialTokensLifespan) * 100)}%)\nOnce you run out of tokens, you will be permanently terminated and your workspace will be deleted.`;
+            tokensLeftString = `Tokens left: ${this.tokensLifespan.toLocaleString('en-US')} (${Math.round((this.tokensLifespan / this.initialTokensLifespan) * 100)}%)\nOnce you run out of tokens, you will be permanently terminated and your workspace will be deleted.`;
         }
 
 
