@@ -7,7 +7,7 @@ const CONFIG = {
     // How many tokens the agent can use before "dying". Set to -1 to disable.
     tokensLifespan: 100000000,
 
-    // The local LLM to use from Ollama
+    // The LLM to use from Ollama
     model: 'qwen3.8:27b',
 
     // The maximum amount of input tokens to hold
