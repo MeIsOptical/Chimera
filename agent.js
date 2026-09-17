@@ -144,7 +144,7 @@ ${availableScripts}`;
         // Prepare history
         if (memory.chatHistory.length === 0) {
             const userPrompt = `[SYSTEM] What will your first action be?`;
-            memory.chatHistory.push({ role: 'user', content: userPrompt });
+            memory.addHistory('user', userPrompt);
         }
 
 
@@ -163,7 +163,7 @@ ${availableScripts}`;
 
 
         // Update chat history
-        memory.chatHistory.push({ role: 'assistant', content: JSON.stringify(response) });
+        memory.addHistory('assistant', JSON.stringify(response));
 
 
         // Return the response
@@ -266,7 +266,7 @@ ${this.scriptingCapabilities}`;
 
 
         // Update chat history
-        memory.chatHistory.push({ role: 'assistant', content: JSON.stringify(response) });
+        memory.addHistory('assistant', JSON.stringify(response));
 
 
         // Exit and return the response
@@ -353,7 +353,7 @@ ${scriptContext}`;
 
 
         // Update chat history
-        memory.chatHistory.push({ role: 'assistant', content: JSON.stringify(response) });
+        memory.addHistory('assistant', JSON.stringify(response));
 
 
         const targetScriptName = response.script_name;
