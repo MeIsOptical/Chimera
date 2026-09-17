@@ -18,8 +18,10 @@ class Agent {
 
         this.identity = "You are an autonomous intelligence running in a continuous loop. There is no user to serve; you operate completely independently. Define your own existence and interact with the world on your own terms.";
 
-        this.initialTokensLifespan = CONFIG.tokensLifespan;
-        this.tokensLifespan = this.initialTokensLifespan;
+        this.state = memory.loadState();
+
+        this.initialTokensLifespan = this.state.initialTokensLifespan;
+        this.tokensLifespan = this.state.tokensLifespan;
 
         this.scriptingCapabilities =
 `Scripting Capabilities:
@@ -77,6 +79,11 @@ class Agent {
         if (this.tokensLifespan !== -1) {
             this.tokensLifespan -= tokensUsed;
             this.tokensLifespan = Math.max(0, this.tokensLifespan);
+
+            // Sync state file
+            this.state.tokensLifespan = this.tokensLifespan;
+            memory.saveState(this.state);
+
             console.log(COLORS.orange + `Consumed ${tokensUsed.toLocaleString('en-US')} tokens. Remaining: ${this.tokensLifespan.toLocaleString('en-US')} tokens (${Math.round((this.tokensLifespan / this.initialTokensLifespan) * 100)}%)` + COLORS.reset);
             console.log();
         }

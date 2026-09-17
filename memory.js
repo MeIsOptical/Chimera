@@ -10,6 +10,7 @@ const CONFIG = require('./config');
 const SCRIPTS_DIR = path.resolve(__dirname, 'workspace/scripts');
 const DEFAULT_SCRIPTS_DIR = path.resolve(__dirname, 'tools/scripting/default_scripts');
 const HISTORY_FILE_PATH = path.resolve(__dirname, 'workspace/history.json');
+const STATE_FILE_PATH = path.resolve(__dirname, 'workspace/state.json');
 
 if (!fs.existsSync(DEFAULT_SCRIPTS_DIR)) {
     fs.mkdirSync(DEFAULT_SCRIPTS_DIR, { recursive: true });
@@ -24,8 +25,12 @@ if (!fs.existsSync(SCRIPTS_DIR)) {
     }
 }
 
-if (!fs.existsSync(path.dirname(HISTORY_FILE_PATH))) {
-    fs.mkdirSync(path.dirname(HISTORY_FILE_PATH), { recursive: true });
+if (!fs.existsSync(path.dirname(STATE_FILE_PATH))) {
+    fs.mkdirSync(path.dirname(STATE_FILE_PATH), { recursive: true });
+}
+
+if (!fs.existsSync(path.dirname(STATE_FILE_PATH))) {
+    fs.mkdirSync(path.dirname(STATE_FILE_PATH), { recursive: true });
 }
 
 
@@ -63,6 +68,32 @@ class Memory {
     addHistory(pRole, pContent) {
         this.chatHistory.push({ role: pRole, content: pContent });
         this.saveHistory();
+    }
+
+
+
+
+
+    // Load state from file
+    loadState() {
+        if (fs.existsSync(STATE_FILE_PATH)) {
+            try {
+                return JSON.parse(fs.readFileSync(STATE_FILE_PATH, 'utf8'));
+            } catch (error) {
+                // Fall back if corrupted
+            }
+        }
+        return {
+            initialTokensLifespan: CONFIG.tokensLifespan,
+            tokensLifespan: CONFIG.tokensLifespan
+        };
+    }
+
+
+
+    // Save state locally
+    saveState(pState) {
+        fs.writeFileSync(STATE_FILE_PATH, JSON.stringify(pState, null, 2), 'utf8');
     }
 
 
