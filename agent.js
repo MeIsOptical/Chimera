@@ -165,7 +165,7 @@ ${availableScripts}`;
         const response = await this.prompt(
             [{ role: 'system', content: systemPrompt }, ...memory.chatHistory],
             responseSchema,
-            0.9
+            0.8
         );
 
 
