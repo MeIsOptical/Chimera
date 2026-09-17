@@ -170,7 +170,7 @@ class Memory {
     truncateHistory(pTargetLength = CONFIG.inputTokens) {
         let modified = false;
 
-        while (this.chatHistory.length > 1) {
+        while (this.chatHistory.length > 0) {
             const serialized = JSON.stringify(this.chatHistory);
             const currentTokens = Math.ceil(serialized.length / CONFIG.charsPerToken);
             if (currentTokens <= pTargetLength) break;
